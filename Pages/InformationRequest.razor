@@ -1,0 +1,27 @@
+@page "/information-request"
+@attribute [Authorize]
+
+<div class="row pt-5 px-1">
+    <div class="col-md-5 mb-3">
+        <RadzenRadioButtonList TValue="int" Orientation="Radzen.Orientation.Vertical" Value="@option" Change="arg => option = arg">
+            <Items>
+                <RadzenRadioButtonListItem TValue="int" Text="Request MTD Authorisation" Value="1"></RadzenRadioButtonListItem>
+                <RadzenRadioButtonListItem TValue="int" Text="Request Information for Next Task" Value="2"></RadzenRadioButtonListItem>
+                <RadzenRadioButtonListItem TValue="int" Text="Software Subscription Overdue Reminder" Value="3"></RadzenRadioButtonListItem>
+                <RadzenRadioButtonListItem TValue="int" Text="Custom Email" Value="4"></RadzenRadioButtonListItem>
+            </Items>
+        </RadzenRadioButtonList>
+    </div>
+    <div class="col-md-7 mb-3" style="margin: 0px;">
+        <div style="height:50px;"></div>
+        <RadzenDropDown TValue="string" Style="margin-right: 10px; margin-left: 0px; width: 100px;" Data=@tasks Value="@tasks[0]"></RadzenDropDown>
+        <RadzenDatePicker TValue="DateTime" @bind-Value=@date DateFormat="dd-MM-yyyy" Style="margin-left: 0px; width: 150px"></RadzenDatePicker>
+        <b> ~ </b>
+        <RadzenDatePicker TValue="DateTime" @bind-Value=@date DateFormat="dd-MM-yyyy" Style="width: 150px"></RadzenDatePicker>
+    </div>
+</div>
+
+<div style="width: 400px; margin: 10px auto 10px auto;">
+    <RadzenButton Text="Print" Style="display: inline-block; height: 45px; width: 150px;"></RadzenButton>
+    <RadzenButton Text="Email" Style="display: inline-block; height: 45px;  width: 150px; float: right;" Click="@OnEmail"></RadzenButton>
+</div>

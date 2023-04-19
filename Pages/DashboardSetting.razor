@@ -1,0 +1,366 @@
+@page "/dashboard-setting"
+@using Microsoft.AspNetCore.Components.Authorization;
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+
+
+
+<PageTitle>Home</PageTitle>
+
+<style>
+	.caption {
+		padding-top: 8px;
+	}
+	.border-primary {
+		border-color: #aaa !important;
+		border-width: 2px!important;
+	}
+	.step {
+		height: 180px;
+		background-color: white;
+		position: relative;
+	}
+
+	.cover {
+		top:0; left: 0; width: 100%; height: 100%;
+		position: absolute;
+		background-color:#44444488;
+	}
+	.step_body {
+		position: relative;
+	}
+	.navigation_bar {
+		position: absolute;
+		height: 100%;
+		width: 60px;
+		right: 0px;
+		top: 0px;
+	}
+	a.navigation_container {
+		color: gray;
+		text-align: center;
+		background-color: #ccc;
+		height: 40px;
+		aspect-ratio: 1 / 1;
+		float: right;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+	}
+
+	a.navigation_container:hover {
+		background-color: #aaa;
+
+	}
+	a.navigation_container:first-of-type {
+		top: 0px; right: 0px;
+	}
+	a.navigation_container:last-of-type {
+		bottom: 0px; right: 0px;
+	}
+	.navigation_item {
+		margin: 0 auto;
+		display: block;
+	}
+	.hide {
+		opacity: 0;
+	}
+	.show {
+		opacity: 1;
+	}
+</style>
+
+<link rel="stylesheet" href="https://use.fortawesome.com/kits/349cfdf6/publications/119263/woff2.css" media="all">
+
+<div class="container-fluid">
+	<div class="row">
+			@if (!isAuthenticated)
+			{
+				<h1 class="text-center">
+					GUEST DASHBOARD</h1>
+			}
+			else
+			{
+				<h1 class="text-center">
+					DASHBOARD SETUP</h1>
+			}
+	</div>
+
+	<div class="row mt-5">
+
+		<div class="row border border-primary step">
+			<div class="col-md-2 border-end border-primary d-flex align-items-center">
+				<div class="justify-content-center text-center" style="width: 100%">
+					<h1>1</h1>
+					<p>Company Information</p>
+				</div>
+			</div>
+
+			<div class="col-md-10 d-flex align-items-center step_body">
+				<div class="row justify-content-center" style="width: 100%">
+					<div class="row mt-2">
+						<div class="col-4 center">
+							<span class="float-end caption">VAT Registration Number</span>
+						</div>
+						<div class="col-6">
+							<RadzenTextBox style="width: 300px;" @bind-Value="vrn"/>
+							<RadzenButton Text="Lookup" Style="margin-left: 30px;" Click="@LookupVRN"/>
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col-4">
+							<span class="float-end caption">Business Name</span>
+						</div>
+						<div class="col-6">
+							<RadzenTextBox style="width: 300px;" @bind-Value="business_name" />
+						</div>
+
+					</div>
+					<div class="row mt-2">
+						<div class="col-4">
+							<span class="float-end caption">Registered Address</span>
+						</div>
+						<div class="col-6">
+							<RadzenTextBox style="width: 300px;" @bind-Value="reg_address" />
+						</div>
+					</div>
+					<div class="row mt-2" />
+
+				</div>
+			</div>
+			<div class="navigation_bar">
+				<a class="navigation_container align-items-center hide" @onclick="prev_step">
+					<i class="fa-1x fa-solid fa-arrow-up navigation_item"></i>
+				</a>
+				<a class="navigation_container align-items-center " @onclick="next_step">
+					<i class="fa-1x fa-solid fa-arrow-down navigation_item"></i>
+				</a>
+			</div>
+
+			@if (step != 1)
+			{
+				<div class="cover" />
+			}
+		</div>
+
+		<div class="row border border-primary mt-4 step">
+			<div class="col-md-2 border-end border-primary d-flex align-items-center">
+				<div class="justify-content-center text-center" style="width: 100%">
+					<h1>2</h1>
+					<p>Software Authorise</p>
+				</div>
+			</div>
+
+			<div class="col-md-10 d-flex align-items-center">
+				<div class="row justify-content-center" style="width: 100%">
+					<div class="row">
+						<div class="col-4">
+							<span class="float-end caption">Connect to HMRC</span>
+						</div>
+						<div class="col-6">
+							<form method="get" action="@(!isAuthenticated ? "Account/UserRestrictedCallFromGuest" : "Account/UserRestrictedCall")">
+								<RadzenButton Text="Authorise" ButtonType="ButtonType.Submit" Click="@onAuthenticate" />
+								&nbsp; &nbsp;
+								@if(step == 2)
+								{
+									<span style="color: @(isAuthorised ? "blue": "red"); font-size: 12px;">
+										@(isAuthorised ? "Authorised" : "Unauthorised")
+									</span>
+								}
+								
+
+								<!-- <RadzenTextBox style="width: 100%;" Name="key" Class="mb-4" Value="@Security.User.Id" hidden /> -->
+								<RadzenTextBox style="width: 100%;" Name="Vrn" Class="mb-4" @bind-Value="vrn" hidden/>
+							</form>
+						</div>
+					</div>
+
+					@if(!isAuthenticated)
+					{
+						<div class="row mt-2">
+							<div class="col-4">
+								<span class="float-end caption">Vat Submission Period</span>
+							</div>
+							<div class="col-6">
+								<RadzenDropDown TValue="string" Data="@periodData" ValueChanged="@(arg => period = arg)" />
+							</div>
+						</div>
+					}
+
+				</div>
+
+			</div>
+
+			<div class="navigation_bar">
+				<a class="navigation_container align-items-center" @onclick="prev_step">
+					<i class="fa-1x fa-solid fa-arrow-up navigation_item"></i>
+				</a>
+				<a class="navigation_container align-items-center @(isAuthenticated ? "hide" : "")" @onclick="next_step">
+					<i class="fa-1x fa-solid fa-arrow-down navigation_item"></i>
+				</a>
+			</div>
+
+			@if(step != 2)
+			{
+				<div class="cover" />
+			}
+		</div>
+
+		@if(!isAuthenticated)
+		{
+			<div class="row border border-primary mt-4 step" style="min-height: 180px !important; height: unset;">
+				<div class="col-md-2 border-end border-primary d-flex align-items-center">
+					<div class="justify-content-center text-center" style="width: 100%">
+						<h1>3</h1>
+						<p>Link to Spreadsheet</p>
+					</div>
+				</div>
+
+				<div class="col-md-10 d-flex align-items-center">
+					<div class="row justify-content-center" style="width: 100%; font-size:12px;">
+						<div class="col-md-12">
+							<div class="row mt-4">
+								<InputFile OnChange="@HandleFileSelected"/>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12" style="margin: 30px 0px;">
+
+									<div class="row">
+										<div class="col-md-7 align-items-center d-flex">
+										</div>
+										<div class="col-md-2">
+											<RadzenLabel Text="Sheet Name" />
+										</div>
+										<div class="col-md-1">
+											<RadzenLabel Text="Cell Number" />
+										</div>
+										<div class="col-md-2">
+											<RadzenLabel Text="Amount" />
+										</div>
+									</div>
+
+									@foreach(var rowItem in sheetModel) {
+								
+										<div class="row mt-1">
+											<div class="col-md-7 d-flex">
+												<RadzenLabel Text="@rowItem.VatString" />
+											</div>
+											<div class="col-md-2">
+												<RadzenDropDown Data="@sheetNameData" style="width: 100%" ValueProperty="index" 
+												TextProperty="data" TValue="int" @bind-Value="@rowItem.SheetNumber" Change="@(arg => {
+																	rowItem.SheetNumber = (int)arg;
+																	UpdateSubmitData();
+																})"/>
+											</div>
+											<div class="col-md-1">
+												<RadzenTextBox style="width: 100%;" @bind-Value="@rowItem.CellAddr" @oninput="@((arg) => {rowItem.CellAddr=arg.Value.ToString(); UpdateSubmitData();})" />
+											</div>
+											<div class="col-md-2">
+												<RadzenNumeric style="width: 100%;" @bind-Value="@rowItem.Amount" ReadOnly="true"/>
+											</div>
+										</div>
+									}
+
+									<div class="row">
+										<div class="col-md-12 d-flex align-items-center mt-3">
+											<RadzenCheckBox Name="Confirm" TValue="bool" Value="isAllow" Change="@(args => {
+												isAllow = args;
+											})"/>
+											<RadzenLabel Text="When you submit this VAT information you are making a legal declaration that the information is true and complete. A false declaration can result in prosecution." Style="margin-left: 15px; " />
+											<RadzenRequiredValidator Component="Confirm" Text="First name is required" Style="position: absolute" />
+										</div>
+										@*<RadzenNumeric style="width: 100%;" Name="FirstName" @bind-Value="@(vatReturn.totalAcquisitionsExVAT)" />
+										@*<RadzenTextBox style="display: block" Name="FirstName" @bind-Value="@(vatReturn.totalAcquisitionsExVAT.ToString())" Class="w-100" />*@
+										@*<RadzenRequiredValidator Component="FirstName"   Text="First name is required" Style="position: absolute" />*@
+									</div>
+								</div>
+							</div>
+
+							<!--
+							@if (filename != null && filename != "")
+							{
+								<h3 style="display: inline;">@($"{filename}")</h3>
+
+								<h5 style="display: inline;">@($" ({(double)filesize / 1000}Kb)")</h5>
+							}
+							else
+							{
+								<span>No File Is Selected</span>
+							}
+							-->
+						</div>
+					</div>
+				</div>
+
+				<div class="navigation_bar">
+					<a class="navigation_container align-items-center" @onclick="prev_step">
+						<i class="fa-1x fa-solid fa-arrow-up navigation_item"></i>
+					</a>
+					<a class="navigation_container align-items-center " @onclick="next_step">
+						<i class="fa-1x fa-solid fa-arrow-down navigation_item"></i>
+					</a>
+				</div>
+				@if(step != 3)
+				{
+					<div class="cover" />
+				}
+			</div>
+
+			<div class="row border border-primary mt-4 step">
+				<div class="col-md-2 border-end border-primary d-flex align-items-center">
+					<div class="justify-content-center text-center" style="width: 100%">
+						<h1>4</h1>
+						<p>Declaration & Confirmation</p>
+					</div>
+				</div>
+
+				<div class="col-md-10 d-flex align-items-center">
+					<div class="row justify-content-center" style="width: 100%">
+						<div class="row mt-2">
+							<div class="col-4 center">
+								<span class="float-end caption">Email Address: </span>
+							</div>
+							<div class="col-6">
+								<RadzenTextBox style="width: 300px;" @bind-Value="email" />
+							</div>
+						</div>
+						<div class="row mt-2">
+							<div class="col-md-12" style="display: flex;">
+								<RadzenCheckBox TValue="bool" Style="margin-top: 5px;" />
+								<div style="display: inline; margin-left: 20px;">
+									&nbsp; A copy of the submission reference will be sent to the above email.
+									When you submit this VAT information you are making a legal declaration that the information is true and complete. A false declaration can result in prosecution.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="navigation_bar">
+					<a class="navigation_container align-items-center" @onclick="prev_step">
+						<i class="fa-1x fa-solid fa-arrow-up navigation_item"></i>
+					</a>
+					<a class="navigation_container align-items-center hide" @onclick="next_step">
+						<i class="fa-1x fa-solid fa-arrow-down navigation_item"></i>
+					</a>
+				</div>
+				@if (step != 4)
+				{
+					<div class="cover" />
+				}
+			</div>
+		}
+		
+
+		<div class="row mt-4">
+			<div class="col-md-12">
+				<RadzenButton Text="Submit" class="float-end" Style="width: 100px; background-color: rgb(245, 129, 53)" Click="@Submit"/>
+				<RadzenButton Text="Exit" Style="margin-right: 20px; width: 100px; background-color: rgb(245, 129, 53)" class="float-end" Click="@Exit"/>
+			</div>
+			
+		</div>
+	</div>
+</div>

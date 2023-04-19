@@ -1,0 +1,132 @@
+@layout RegisterLayout
+@page "/register"
+
+<style>
+	body {
+		background-color: white;
+	}
+
+	.board {
+		position: relative;
+		top: 100px;
+		left: 200px;
+		width: 400px;
+		box-shadow: 0px 0px 5px 1px #ccc;
+		margin-bottom: 50px;
+		
+	}
+	.head-title {
+		position: relative;
+		left: 200px;
+		top: 80px;
+	}
+
+	.head {
+		width: 100%;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.main {
+		border: 1px #ccc solid;
+		border-top: none;
+		padding: 0px;
+	}
+
+	.main_body {
+		padding: 10px;
+		background-color: white;
+	}
+
+	.main_body p {
+			font-size: 12px;
+	}
+
+	a.tab {
+		text-align: center;
+		padding: 10px;
+
+		color: white;
+		background-color: gray;
+		border: 1px #ccc solid;
+		border-bottom: none;
+
+		text-decoration:none !important;
+		cursor: pointer;
+	}
+	a.tab:hover {
+		color: white;
+	}
+	a.tab.active:hover {
+		color: purple;
+	}
+	.tab.active {
+		color: purple;
+		background-color: white;
+		
+	}
+
+	.heading {
+		margin: 30px 60px;
+	}
+	a {
+		text-decoration: underline !important;
+		color: gray;
+		cursor: pointer;
+	}
+	.background {
+		position: fixed;
+		right: 0px;
+		top: 0px;
+		height: 100%;
+	}
+</style>
+
+<div class="background">
+	<img src="./images/register-back.png" style="height: 100%;"/>
+</div>
+
+
+	<div class="col-md-6" style="margin-bottom: 120px;">
+		<div class="head-title">
+			<h1>SIGN UP TO</h1>
+			<h1>MAKE TAX DOABLE</h1>
+		</div>
+
+		
+
+		<div class="board">
+
+			
+			<div class="row head">
+				<a class="col-6 tab @(currentTab == 1 ? "active" : "") " @onclick="onIndividual">Individual</a>
+				<a class="col-6 tab @(currentTab == 2 ? "active" : "") " @onclick="onAccountant">Accountant</a>
+
+			</div>
+
+			<div class="main">
+				<div class="main_body" id="individual_board">
+					<div class="heading">
+						<h5>Try for FREE for 30 days</h5>
+						<h5>No credit card required</h5>
+						<h5>Secure & HMRC-recognised</h5>
+					</div>
+
+				<RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">@error</RadzenAlert>
+				<RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Info" Visible="@infoVisible" >@info</RadzenAlert>
+				
+				<RadzenTextBox Placeholder="First name" Style="width: 100%; margin-bottom: 10px;" @bind-Value="first_name"/>
+				<RadzenTextBox Placeholder="Last name" Style="width: 100%; margin-bottom: 10px;" @bind-Value="last_name" />
+				<RadzenTextBox Placeholder="Email" Style="width: 100%; margin-bottom: 10px;" @bind-Value="email" />
+				<RadzenPassword Placeholder="Password" Style="width: 100%; margin-bottom: 10px;" @bind-Value="password" />
+
+					<p>Your password must have at least 8 characters.</p>
+					<p>By creating an account. you agree to our <u>Teams</u> and <u>Privacy Policy</u></p>
+					<br /><br />
+					<RadzenButton Text="Confirm" Style="width: 100%; padding: 10px;" Click="@onRegister"/>
+					<p class="text-center" style="margin-top: 20px; font-size: 14px;">Already singed up? <a href="/login">Sign in now</a></p>
+
+				</div>
+			</div>
+		</div>
+	</div>

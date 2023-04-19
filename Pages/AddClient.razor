@@ -1,0 +1,237 @@
+@page "/add-client"
+@using SimplyMTD.Models.MTD;
+
+<style>
+    .rz-textbox {
+        padding: 0.1rem 1rem;
+        font-size: 16px;
+        height: 2rem;
+        margin-bottom: 3px;
+        width: 100%;
+    }
+
+    .bt-btn {
+        height: 40px;
+        width: 200px;
+        display: inline-block;
+        background-color: gray !important;
+    }
+
+    .btn-dashboard {
+        margin: auto;
+        width: 300px;
+        height: 50px;
+        display: block;
+        color: darkgreen !important;
+        border-radius: 25px;
+        border: solid 1px darkgreen;
+        background-color:azure !important;
+    }
+</style>
+
+<PageTitle>Add Client</PageTitle>
+<div class="row">
+    <div class="col-md-12">
+        <RadzenButton class="btn-dashboard" Text="Access Client Dashboard" Click="@AccessClientDashboard" Variant="Variant.Flat"/>
+    </div>
+    <RadzenAlert Title="@msgTitle" Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="@msgStyle" Visible="@msgVisible">@msgContent</RadzenAlert>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Client ID:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.ClientId" Disabled=@(!isEdit) />
+
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Client Name:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.OwnerName" Disabled=@(!isEdit) />
+
+            </div>
+        </div>
+
+        <div class="row mt-2" style="position: relative">
+            <div class="col-md-5">
+                <RadzenText Text="Vat Registration:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.Vrn" Disabled=@(!isEdit)
+                Style="padding-right: 98px;"/>
+                <RadzenButton Text="Lookup" 
+                    Style="top: 0px;
+                            position:absolute;
+                            right: 12px;
+                            height: 2rem;
+                            margin: 0px;
+                            min-height:unset;
+                            text-transform:unset;"
+                    Click="@Lookup">
+                </RadzenButton>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Registration Date:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenDatePicker ShowTime="false"
+                                  HourFormat="12" DateFormat="yyyy-MM-dd" @bind-Value="client.RegDate" Style="width: 100%;" Disabled=@(!isEdit) />
+
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Business Name:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.BusinessName" Disabled=@(!isEdit) />
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Business Type:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenDropDown Disabled=@(!isEdit) Placeholder="Select..." Value="@client.BusinessType" Data="@businessType" TValue="string" ValueChanged="@((arg) => {client.BusinessType = arg;})" Style="width: 100%;"/>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Address Line 1:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.Address" Disabled=@(!isEdit) />
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Address Line 2:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.Address2" Disabled=@(!isEdit) />
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Post Code:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.PostCode" Disabled=@(!isEdit) />
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Email:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.Email" Disabled=@(!isEdit) />
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Mobile Number:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox @bind-Value="@client.PhoneNumber" Disabled=@(!isEdit) />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="MTU Authorisation:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox ReadOnly @bind-Value="@authorisation"/>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <RadzenButton Text="Send Request" Disabled=@(!isEdit) Click="@SendRequest" Variant="Variant.Flat" Style="display: inline-block" />
+
+                <RadzenButton Text="Cancel Request" Disabled=@(!isEdit) Click="@CancelRequest" Variant="Variant.Flat" Style="display: inline-block" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 4rem;">
+            <div class="col-md-5">
+                <RadzenText Text="Software Subscription:" Disabled=@(!isEdit) style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenTextBox ReadOnly @bind-Value="@subscription" />
+            </div>
+        </div>
+        <!--
+        <div class="row mt-3">
+            <span>
+                <RadzenButton Text="Inform Client" Disabled=@(!isEdit) Click="@InformClient" Variant="Variant.Flat" />
+            </span>
+        </div>
+        -->
+
+        <div class="row" style="margin-top: 4rem;">
+            <b>Staff Allocation</b>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Partner:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenDropDown Disabled=@(!isEdit) Placeholder="Select..." Value="@client.Partner" Data="@w8users" TValue="string" ValueChanged="@((arg) => {client.Partner = arg;})" />
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <RadzenText Text="Manager:" style="text-align: right;" />
+            </div>
+            <div class="col-md-7">
+                <RadzenDropDown Disabled=@(!isEdit) Placeholder="Select..." Data="@w8users" Value="@client.Manager" TValue="string" ValueChanged="@((arg) => {client.Manager = arg;})" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1" />
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        @if(isNew == true) {
+            <RadzenButton Text="Create Client" Click="@CreateClient" Variant="Variant.Flat" class="bt-btn" Style="float: right;"/>
+        } else {
+            if(isEdit)
+            {
+                <RadzenButton Text="Save Client" Click="@SaveClient" Variant="Variant.Flat" class="bt-btn" Style="float: right;" />
+            } else
+            {
+                <RadzenButton Text="Edit Information" Click="@Edit" Variant="Variant.Flat" class="bt-btn" Style="float: right;" />
+            }
+        }
+    </div>
+    <div class="col-md-6">
+        @if(isNew == true)
+        {
+            <RadzenButton Text="Cancel" Click="@Cancel" Variant="Variant.Flat" class="bt-btn" />
+        } else
+        {
+            <RadzenButton Text="Delete Client" Click="@DeleteClient" Variant="Variant.Flat" class="bt-btn" />
+        }
+    </div>
+</div>

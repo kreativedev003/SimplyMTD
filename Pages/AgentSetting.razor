@@ -1,0 +1,150 @@
+@page "/agentProfle"
+@using SimplyMTD.Models;
+@using SimplyMTD.Models.MTD;
+
+@attribute [Authorize]
+<style>
+	form .row {
+		margin-bottom: 16px;
+	}
+</style>
+
+<PageTitle>Profile</PageTitle>
+<RadzenHeading Size="H1" Text="Profile" />
+
+<RadzenTabs TabPosition="@TabPosition.Left" Class="w-75 my-5 mx-auto" RenderMode="TabRenderMode.Client">
+	<Tabs>
+		<RadzenTabsItem Text="Practice Details">
+			<RadzenTemplateForm Data="@(userDetail)" TItem="SimplyMTD.Models.MTD.UserDetail" Visible="@(userDetail != null)" Submit="@GeneralFormSubmit">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<RadzenFieldset Text="General Information">
+								<div class="row">
+									<div class="col-md-4 align-items-center d-flex">
+										<RadzenLabel Text="Name" />
+									</div>
+									<div class="col-md-8">
+										<RadzenTextBox style="width: 100%;" Name="OwnerName" @bind-Value="@userDetail.OwnerName" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 align-items-center d-flex">
+										<RadzenLabel Text="Business Name" />
+									</div>
+									<div class="col-md-8">
+										<RadzenTextBox style="width: 100%;" Name="BusinessName" @bind-Value="@userDetail.BusinessName" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 align-items-center d-flex">
+										<RadzenLabel Text="Agent Reference" />
+									</div>
+									<div class="col-md-8">
+										<RadzenTextBox style="width: 100%;" Name="Vrn" @bind-Value="@userDetail.Vrn" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 align-items-center d-flex">
+										<RadzenLabel Text="Profile Photo" />
+									</div>
+									<div class="col-md-4">
+										<RadzenImage Path="@userDetail.Photo" Style="width: 100%;"></RadzenImage>
+									</div>
+									<div class="col-md-4">
+										<RadzenUpload @ref="upload" Auto="false" Url="upload/image" Change=@(args => OnChange(args, "Manual Upload"))
+													  Progress=@(args => OnProgress(args, "Manual Upload")) Complete=@OnComplete class="w-100" />
+										<RadzenButton Text="Upload" Click=@(args => upload.Upload()) class="d-block mt-4" />
+									</div>
+								</div>
+							</RadzenFieldset>
+						</div>
+
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-12 d-flex align-items-end justify-content-end" style="margin-top: 16px;">
+							<RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+						</div>
+					</div>
+				</div>
+			</RadzenTemplateForm>
+		</RadzenTabsItem>
+
+		<RadzenTabsItem Text="User Settings">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<RadzenButton Text="Add User" Variant="Variant.Flat" Click="@w8Create" />
+					</div>
+					<div class="col-md-12">
+						<RadzenDataGrid @ref="gridW8" Data=@w8users
+									FilterMode="FilterMode.Simple"
+									TItem="W8" Class="mt-3">
+							<Columns>
+								<RadzenDataGridColumn TItem="W8" Property="ClientId" Title="Reference" TextAlign="Radzen.TextAlign.Center" />
+								<RadzenDataGridColumn TItem="W8" Property="Name" Title="User Name" TextAlign="Radzen.TextAlign.Center" />
+								<RadzenDataGridColumn TItem="W8" Property="Email" Title="Email Address" TextAlign="Radzen.TextAlign.Center" />
+								<RadzenDataGridColumn TItem="W8" Property="Permission" Title="Permission" TextAlign="Radzen.TextAlign.Center">
+									<Template Context="data">
+										@{
+											@permission_string[data.Permission];
+										}
+									</Template>
+								</RadzenDataGridColumn>
+								<RadzenDataGridColumn TItem="W8" TextAlign="Radzen.TextAlign.Center">
+									<Template Context="w8user">
+										<RadzenButton Click="@(() => w8Update(w8user))" Text="Edit" ButtonStyle="Radzen.ButtonStyle.Primary" Size="Radzen.ButtonSize.Small" Shade="Radzen.Shade.Light"></RadzenButton>
+									</Template>
+								</RadzenDataGridColumn>
+
+							</Columns>
+						</RadzenDataGrid>
+					</div>
+				</div>
+			</div>
+		</RadzenTabsItem>
+
+		<RadzenTabsItem Text="Notifications">
+			<RadzenTemplateForm Data="@(accounting)" TItem="SimplyMTD.Models.MTD.Accounting" Visible="@(accounting != null)" Submit="@AccountingFormSubmit">
+				<RadzenFieldset Text="General Information">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<RadzenCheckBoxList @bind-Value=@values TValue="int" Orientation="Radzen.Orientation.Vertical">
+									<Items>
+										<RadzenCheckBoxListItem Text="Request MTD Authorisation" Value="1" />
+										<RadzenCheckBoxListItem Text="Request Information for Next Task" Value="2" />
+										<RadzenCheckBoxListItem Text="Software Subscription Overdue Reminder" Value="3" />
+										<RadzenCheckBoxListItem Text="Custom Email" Value="4" />
+									</Items>
+								</RadzenCheckBoxList>
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col-md-12 d-flex align-items-end justify-content-end" style="margin-top: 16px;">
+								<RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Edit / Save" />
+							</div>
+						</div>
+					</div>
+				</RadzenFieldset>
+			</RadzenTemplateForm>
+		</RadzenTabsItem>
+		
+		<RadzenTabsItem Text="Connect to HMRC">
+			<RadzenFieldset Text="General Information">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<p>Authorise Software to Connect to HMRC Agnet Account</p>
+						</div>
+					</div>
+				</div>
+			</RadzenFieldset>
+		</RadzenTabsItem>
+
+	</Tabs>
+</RadzenTabs>
+
+@code {
+	string[] permission_string = { "Super User", "Staff Access", "Limited user" };
+}

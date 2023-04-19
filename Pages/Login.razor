@@ -1,0 +1,28 @@
+@layout LoginLayout
+@page "/login"
+
+<PageTitle>Login</PageTitle>
+<RadzenText Text="Login" TextStyle="Radzen.Blazor.TextStyle.H5" class="mb-4" TagName="Radzen.Blazor.TagName.H2" />
+<div class="row">
+	<div class="col-md-12">
+		<RadzenTemplateForm Action="@($" account/login?redirectUrl={redirectUrl}")" Data="@("login")"
+							Method="post" TItem="string" Submit="@Submit">
+			<RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Danger" Visible="@errorVisible" >@error</RadzenAlert>
+			<RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Info" Visible="@infoVisible" >@info</RadzenAlert>
+	   
+		<!--
+			<RadzenRadioButtonList TValue="int" @bind-Value="@accountType">
+		   <Items>
+				<RadzenRadioButtonListItem TValue="int" Text="Client" Value="1" />
+				<RadzenRadioButtonListItem TValue="int" Text="Agent" Value="2" />
+		   </Items>
+	   </RadzenRadioButtonList>
+	   -->
+
+		<RadzenLogin AllowResetPassword="true" AllowRegister="true"
+							ResetPassword="@ResetPassword"
+							Register="@Register" />
+
+		</RadzenTemplateForm>
+	</div>
+</div>

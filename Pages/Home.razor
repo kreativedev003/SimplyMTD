@@ -1,0 +1,209 @@
+@page "/"
+@using Microsoft.AspNetCore.Components
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+
+
+<PageTitle>Home</PageTitle>
+
+<style>
+    .file-drop {
+        border: 3px dashed #ccc;
+        padding: 2rem;
+    }
+
+	.dropzone-hover {
+        background-color: #44444444;
+    }
+
+	.dropzone {
+		border: 3px dashed steelblue;
+		padding: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+		color: #444;
+		font-size: 1.5rem;
+		cursor: pointer;
+		position: relative;
+	}
+ 
+    .dropzone:hover {
+			background-color: #03111111;
+    }
+ 
+    .dropzone input[type=file] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+		opacity: 0;
+        cursor: pointer;
+    }
+ 
+	.dropzone-drag {
+		background-color: #33444444;
+	}
+
+	.dashboard-card {
+		background-color: rgb(254, 139, 80);
+		padding: 20px;
+		color: white;
+		text-align: center;
+		margin: 10px 40px;
+	}
+	.img-container {
+		max-width: 100%;
+		height: 100%;
+		margin-right: 20px;
+	}
+	.text {
+		flex: 1;
+	}
+	#data-security p {
+		font-size: 15px;
+	}
+</style>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<h1 class="text-center">SUBMIT YOUR MTD RETURN</h1>
+	</div>
+
+	<div class="row mt-5">
+
+		<div class="col-6 file-drop"
+		style="border-color: white; height: 300px; text-align: center; margin: auto; position: relative">
+
+			<p class="mt-4">as a Guest - no Account setup or Signup Required</p>
+
+			<img src="/images//excel_image.png" style="align-content:center"/>
+
+			<p>Upload or Drag & Drop Worksheet Here</p>
+
+			<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;"
+				 class="dropzone @HoverClass">
+
+				<InputFile id="fileInput" multiple title=""
+							OnChange="@HandleFileInputChange"
+							@ondragenter="HandleDragEnter"
+							@ondragleave="HandleDragLeave"
+							@ondragend="HandleDropFile"
+						   style="width: 100%; height: 100%;"
+						   />
+
+			</div>
+		</div>
+
+		<div class="row" style="text-align: center;">
+			<p>
+				*Compatible with Apple Numbers, Microsoft Excel, LibreOffice Files
+			</p>
+		</div>
+
+		<div class="row mt-5">
+			<div class="col-md-3" style="text-align: center">
+				<img src="/images/dashboard-1.jpg" style="width: 80%; margin: 0 auto;"/>
+				<p style="text-align: center">VAT Submission</p>
+			</div>
+
+			<div class="col-md-3" style="text-align: center">
+				<img src="/images/dashboard-2.jpg" style="width: 80%; margin: 0 auto;" />
+				<p style="text-align: center">Self-Employed / Partnerships</p>
+			</div>
+
+			<div class="col-md-3" style="text-align: center">
+				<img src="/images/dashboard-3.jpg" style="width: 80%; margin: 0 auto;" />
+				<p style="text-align: center">UK / Foreign Landlords</p>
+			</div>
+
+			<div class="col-md-3" style="text-align: center">
+				<img src="/images/dashboard-4.jpg" style="width: 80%; margin: 0 auto;" />
+				<p style="text-align: center">Limited Companies</p>
+			</div>
+		</div>
+
+		<div class="row mt-5">
+			<div class="col-12" style="background-color: white; border:dashed 2px gray; padding: 30px 20px; box-shadow: 0px 0px 8px gray;">
+				<h4 class="mb-2">Pricing Plan</h4>
+
+				<div class="row">
+
+					<div class="col-md-4">
+
+						<div class="dashboard-card">
+							<h3>One-Off</h3>
+							<h1>
+								£3.99
+							</h1>
+							<p>per submission</p>
+						</div>
+
+					</div>
+
+					<div class="col-md-4">
+
+						<div class="dashboard-card">
+							<h3>Basic Pack</h3>
+							<h1>
+								£3.99
+							</h1>
+							<p>per month</p>
+						</div>
+
+					</div>
+
+					<div class="col-md-4">
+						<div class="dashboard-card">
+							<h3>Premium Pack</h3>
+							<h1>
+								£6.99
+							</h1>
+							<p>per month</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-5 mb-5" id="data-security">
+			<div class="col-12">
+				<h6 class="mb-2">
+					We take your Data Security seriously.
+				</h6>
+				<div class="row mt-4">
+					<div class="col-md-4 d-flex">
+						<img src="images/dashboard-31.png" class=" img-container"/>
+						<div class="text">
+						<p>
+							We are ISO27001 certified. This means we have been audited by a UK government-recognised external auditor confirming we exceed the information security management system requirements of the ISO27001 standards approved by the UK government.
+						</p>
+						</div>
+					</div>
+
+					<div class="col-md-4 d-flex">
+						<img src="images/dashboard-32.png" class="img-container" />
+						<div class="text">
+							<p>
+								We are ISO27001 certified. This means we have been audited by a UK government-recognised external auditor confirming we exceed the information security management system requirements of the ISO27001 standards approved by the UK government.
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-4" style="padding-left: 30px; position: relative">
+						<p>
+							We encrypt all data transferred between you, us and HMRC. When you upload your data to us, we only read your summary figures HMRC needs for tax digital submissions. We do not use or store any of your underlying financial data.
+						</p>
+						<a style="position: absolute; bottom: 0px; text-decoration: dotted">
+							Read More
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

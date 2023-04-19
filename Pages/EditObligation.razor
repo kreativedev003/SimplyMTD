@@ -1,0 +1,208 @@
+@page "/view-obligation"
+@using SimplyMTD.Models;
+@attribute [Authorize]
+
+<style>
+	.box-title {
+		text-align: center;
+	}
+	.row {
+		margin-top: 5px;
+	}
+	.info p {
+		margin-bottom: 0.05rem;
+	}
+	.spacer {
+		height: 60px;
+	}
+</style>
+<PageTitle>Obligation</PageTitle>
+<div class="container-fluid">
+
+	<div class="info">
+		<div class="row">
+			<div class="col-md-2">
+				<p>VAT Registration No:</p>
+			</div>
+			<div class="col-md-2">
+				<p>@(Security.userDetail.Vrn)</p>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-md-2">
+				<p>Return Period:</p>
+			</div>
+			<div class="col-md-2">
+				<p>@(obligation.start) ~ @(obligation.end)</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="spacer" />
+	@if (isLoading)
+	{
+		<div>Loading...</div>
+	}
+	else if (vatReturn == null)
+	{
+		<div>There's not data to show for the obligation</div>
+	}
+
+	<RadzenCard Style="width: 100%; overflow: hidden;" Class="rz-shadow-0" Visible="@(vatReturn != null)">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-1 p-3 box-title">
+						<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">1</RadzenText>
+					</div>
+					<div class="col-md-10 align-items-center d-flex ">
+						<RadzenLabel Text="VAT due in this period on sales and other outputs" />
+					</div>
+					<div class="col-md-1 box-title">
+						<RadzenText>@(vatReturn.vatDueSales.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">2</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="VAT due in the period on acquisitions of goods made in Northern Ireland from EU Member States" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.vatDueAcquisitions.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">3</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="VAT due in the period on acquisitions of goods made in Northern Ireland from EU Member States" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.totalVatDue.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">4</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="Total VAT due (the sum of boxes 1 and 2)" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.vatReclaimedCurrPeriod.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">5</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="VAT reclaimed in the period on purchases and other inputs (incl. acquisitions in Northern Ireland from EU Member States)" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.netVatDue.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">6</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="Net VAT to be paid to HMRC or reclaimed by you (Difference between boxes 3 and 4)" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.totalValueSalesExVAT.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">7</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="Total value of sales and all other outputs excluding any VAT. Include your box 8 figure" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.totalValuePurchasesExVAT.ToString())</RadzenText>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">8</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="Total value of purchases and all other inputs excluding any VAT. Include your box 9 figure" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.totalValueGoodsSuppliedExVAT.ToString())</RadzenText>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-1 p-3 box-title">
+							<RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5">9</RadzenText>
+						</div>
+						<div class="col-md-10 align-items-center d-flex">
+							<RadzenLabel Text="Total value of dispatches of goods and related costs (excluding VAT) from Northern Ireland to EU Member States" />
+						</div>
+						<div class="col-md-1 box-title">
+							<RadzenText>@(vatReturn.totalAcquisitionsExVAT.ToString())</RadzenText>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</RadzenCard>
+
+	<div class="spacer" />
+
+	<div class="info">
+		<div class="row">
+			<div class="col-md-2">
+				<p>Submission Status:</p>
+			</div>
+			<div class="col-md-2">
+				<p>Accepted by HMRC</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<p>Submission Reference:</p>
+			</div>
+			<div class="col-md-2">
+				<p>2dd537bc-4244-4ebf</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<p>Date of Submission:</p>
+			</div>
+			<div class="col-md-2">
+				<p>@(obligation.due)</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<p>Submitted by:</p>
+			</div>
+			<div class="col-md-2">
+				<p>Agent</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<RadzenButton Text="Download" style="float: right; margin-left: 10px;" Click="@Download"/>
+			<RadzenButton Text="Exit" style="float: right;" Click="@Exit"/>
+		</div>
+	</div>
+
+	</div>

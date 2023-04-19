@@ -1,0 +1,51 @@
+@page "/add-w8"
+
+<PageTitle>Add UserDetail</PageTitle>
+    <div class="col-md-12">
+        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Client</RadzenAlert>
+        <RadzenTemplateForm TItem="SimplyMTD.Models.MTD.W8" Data="@w8user" Visible="@(w8user != null && canEdit)" Submit="@FormSubmit">
+            <div style="margin-bottom: 1rem" class="row">
+                <div class="col-md-3">
+                    <RadzenLabel Text="Id" Component="ClientId" style="width: 100%" />
+                </div>
+                <div class="col-md-9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@w8user.ClientId" Name="ClientId" />
+                </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+                <div class="col-md-3">
+                    <RadzenLabel Text="Name" Component="Name" style="width: 100%" />
+                </div>
+                <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@w8user.Name" Name="Name" />
+                </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+                <div class="col-md-3">
+                    <RadzenLabel Text="Email" Component="Email" style="width: 100%" />
+                </div>
+                <div class="col-md-9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@w8user.Email" Name="ClientId" />
+                </div>
+            </div>
+
+            <div class="row pt-3">
+                <RadzenLabel Text="Permissions:" Component="Permission" style="width: 100%; font-weight: bold" />
+            </div>
+
+        <div class="row px-1">
+            <RadzenRadioButtonList TValue="int" Orientation="Radzen.Orientation.Vertical" @bind-Value="@w8user.Permission">
+                <Items>
+                    <RadzenRadioButtonListItem TValue="int" Text="Super User (Full Access)" Value="0"></RadzenRadioButtonListItem>
+                    <RadzenRadioButtonListItem TValue="int" Text="Staff Access (Except Settings)" Value="1"></RadzenRadioButtonListItem>
+                    <RadzenRadioButtonListItem TValue="int" Text="Limited user (No Add/Maintain/Delete)" Value="2"></RadzenRadioButtonListItem>
+                </Items>
+            </RadzenRadioButtonList>
+        </div>
+
+        <div class="row px-1">
+            <RadzenButton Text="Submit" Style="display: inline-block; height: 45px" ButtonType="ButtonType.Submit"></RadzenButton>
+        </div>
+        </RadzenTemplateForm>
+    </div>
+

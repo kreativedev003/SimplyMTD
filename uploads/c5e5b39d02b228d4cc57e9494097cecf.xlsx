@@ -1,0 +1,2428 @@
+{
+	"info": {
+		"_postman_id": "da68c4b7-ec40-40fb-802f-e35342816aa0",
+		"name": "Tax",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23843551"
+	},
+	"item": [
+		{
+			"name": "Agent Authorisation API",
+			"item": [
+				{
+					"name": "Get all authorisation requests for the last 30 days",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "87d477629ac6015ba75de11cb1e0deeb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/agents/{{arn}}/invitations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agents",
+								"{{arn}}",
+								"invitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new authorisation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "87d477629ac6015ba75de11cb1e0deeb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"service\": [\"MTD-VAT\"],\r\n  \"clientType\":\"business\",\r\n  \"clientIdType\": \"vrn\",\r\n  \"clientId\": \"101747696\",\r\n  \"knownFact\": \"2007-05-18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/agents/{{arn}}/invitations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agents",
+								"{{arn}}",
+								"invitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an invitation by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "87d477629ac6015ba75de11cb1e0deeb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/agents/{{arn}}/invitations/CXXHLPZCMRM3Y",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agents",
+								"{{arn}}",
+								"invitations",
+								"CXXHLPZCMRM3Y"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel an invitation by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "87d477629ac6015ba75de11cb1e0deeb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/agents/{{arn}}/invitations/C6TXDKJSKYA7A",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agents",
+								"{{arn}}",
+								"invitations",
+								"C6TXDKJSKYA7A"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Status of a Relationship",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "87d477629ac6015ba75de11cb1e0deeb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"service\": [\"MTD-VAT\"],\r\n  \"clientIdType\": \"vrn\",\r\n  \"clientId\": \"423439757\",\r\n  \"knownFact\": \"2009-12-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/agents/{{arn}}/relationships",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agents",
+								"{{arn}}",
+								"relationships"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Test User",
+			"item": [
+				{
+					"name": "Create a test user which is an individual",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9def6ee20ebf7663591a82b1f4758ec0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceNames\": [\r\n    \"national-insurance\",\r\n    \"self-assessment\",\r\n    \"mtd-income-tax\",\r\n    \"customs-services\",\r\n    \"goods-vehicle-movements\",\r\n    \"import-control-system\",\r\n    \"mtd-vat\",\r\n    \"common-transit-convention-traders\",\r\n    \"common-transit-convention-traders-legacy\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/create-test-user/individuals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"create-test-user",
+								"individuals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a test user which is an agent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "d73ac88020b447fac9f6479a9c265553",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceNames\": [\r\n    \"agent-services\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/create-test-user/agents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"create-test-user",
+								"agents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available services",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9def6ee20ebf7663591a82b1f4758ec0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/create-test-user/services",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"create-test-user",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Periodic Update",
+			"item": [
+				{
+					"name": "Business Details (MTD) API",
+					"item": [
+						{
+							"name": "List All Businesses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ba5e5f5b989df47d9b0b6fff6bf096df",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.1.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/business/details/{{nino}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"business",
+										"details",
+										"{{nino}}",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve business details",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ba5e5f5b989df47d9b0b6fff6bf096df",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.1.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/business/details/GH199166D/XBIS12345678901",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"business",
+										"details",
+										"GH199166D",
+										"XBIS12345678901"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Obligations (MTD) API",
+					"item": [
+						{
+							"name": "Add a self-employment business [test support]",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ba5e5f5b989df47d9b0b6fff6bf096df",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"accountingPeriod\": {\r\n    \"start\": \"2017-04-06\",\r\n    \"end\": \"2018-04-05\"\r\n  },\r\n  \"accountingType\": \"CASH\",\r\n  \"commencementDate\": \"2016-01-01\",\r\n  \"cessationDate\": \"2018-04-05\",\r\n  \"tradingName\": \"Acme Ltd.\",\r\n  \"businessAddressLineOne\": \"1 Acme Rd.\",\r\n  \"businessAddressLineTwo\": \"London\",\r\n  \"businessAddressLineThree\": \"Greater London\",\r\n  \"businessAddressLineFour\": \"United Kingdom\",\r\n  \"businessPostcode\": \"A9 9AA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/self-employments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"self-employments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Income Tax (Self Assessment) Income and Expenditure Obligations",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ba5e5f5b989df47d9b0b6fff6bf096df",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.1.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/obligations/details/{{nino}}/income-and-expenditure",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obligations",
+										"details",
+										"{{nino}}",
+										"income-and-expenditure"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Self Assessment (MTD) API",
+					"item": [
+						{
+							"name": "Create a self-employment periodic update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"from\": \"2017-04-06\",\r\n  \"to\": \"2017-07-04\",\r\n  \"incomes\": {\r\n    \"turnover\": { \"amount\": 100.25 },\r\n    \"other\": { \"amount\": 100.25 }\r\n  },\r\n  \"expenses\": {\r\n    \"costOfGoodsBought\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"cisPaymentsToSubcontractors\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"staffCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"travelCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"premisesRunningCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"maintenanceCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"adminCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"advertisingCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"businessEntertainmentCosts\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"interest\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"financialCharges\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"badDebt\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"professionalFees\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    },\r\n    \"depreciation\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 100.25\r\n    },\r\n    \"other\": {\r\n      \"amount\": 100.25,\r\n      \"disallowableAmount\": 50.25\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/self-employments/XBIS12345678901/periods",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"self-employments",
+										"XBIS12345678901",
+										"periods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a non-FHL UK property update period",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"from\": \"2017-04-06\",\r\n  \"to\": \"2017-07-05\",\r\n  \"incomes\": {\r\n    \"rentIncome\": {\r\n      \"amount\": 100.25,\r\n      \"taxDeducted\": 100.25\r\n    },\r\n    \"premiumsOfLeaseGrant\": { \"amount\": 100.25 },\r\n    \"reversePremiums\": { \"amount\": 100.25 },\r\n    \"otherPropertyIncome\": { \"amount\": 100.25 },\r\n    \"rarRentReceived\": { \"amount\": 100.25 }\r\n  },\r\n  \"expenses\": {\r\n    \"consolidatedExpenses\": { \"amount\": 100.25 },\r\n    \"residentialFinancialCost\": { \"amount\": 100.25 },\r\n    \"broughtFwdResidentialFinancialCost\": { \"amount\": 100.25 }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/uk-properties/other/periods",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"uk-properties",
+										"other",
+										"periods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a FHL UK property update period",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"from\": \"2017-04-06\",\r\n  \"to\": \"2017-07-05\",\r\n  \"incomes\": {\r\n    \"rentIncome\": {\r\n      \"amount\": 100.25,\r\n      \"taxDeducted\": 100.25\r\n    },\r\n    \"rarRentReceived\" : { \"amount\" : 100.25 }\r\n  },\r\n  \"expenses\": {\r\n    \"premisesRunningCosts\": { \"amount\": 100.25 },\r\n    \"repairsAndMaintenance\": { \"amount\": 100.25 },\r\n    \"financialCosts\": { \"amount\": 100.25 },\r\n    \"professionalFees\": { \"amount\": 100.25 },\r\n    \"costOfServices\": { \"amount\": 100.25 },\r\n    \"travelCosts\": { \"amount\": 100.25 },\r\n    \"other\": { \"amount\": 100.25 },\r\n    \"rarReliefClaimed\" : { \"amount\" : 100.25 }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/uk-properties/furnished-holiday-lettings/periods",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"uk-properties",
+										"furnished-holiday-lettings",
+										"periods"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Individual Calculations (MTD) API",
+					"item": [
+						{
+							"name": "Trigger a Self Assessment Tax Calculation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"taxYear\": \"2017-18\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment tax calculation metadata",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Income Tax and NICs Calculated",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/income-tax-nics-calculated",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"income-tax-nics-calculated"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Taxable Income",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/taxable-income",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"taxable-income"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Allowances, Deductions and Reliefs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/allowances-deductions-reliefs",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"allowances-deductions-reliefs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation End Of Year Estimate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/allowances-deductions-reliefs",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"allowances-deductions-reliefs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Messages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/messages",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"messages"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EOPS",
+			"item": [
+				{
+					"name": "Self Assessment (MTD) API",
+					"item": [
+						{
+							"name": "Get a self-employment annual summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6b1a30bfb1f69eabe88ef25302605b4f",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/self-employments/{{selfEmploymentId}}/2017-18",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"self-employments",
+										"{{selfEmploymentId}}",
+										"2017-18"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a non-FHL UK property business annual summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/uk-properties/other/2021-22",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"uk-properties",
+										"other",
+										"2021-22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a FHL UK property business annual summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/uk-properties/furnished-holiday-lettings/2021-22",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"uk-properties",
+										"furnished-holiday-lettings",
+										"2021-22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Amend a self-employment annual summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"adjustments\": {\r\n    \"includedNonTaxableProfits\": 500.25,\r\n    \"basisAdjustment\": 500.25,\r\n    \"overlapReliefUsed\": 500.25,\r\n    \"accountingAdjustment\": 500.25,\r\n    \"averagingAdjustment\": 500.25,\r\n    \"outstandingBusinessIncome\": 500.25,\r\n    \"balancingChargeBPRA\": 500.25,\r\n    \"balancingChargeOther\": 500.25,\r\n    \"goodsAndServicesOwnUse\": 500.25\r\n  },\r\n  \"allowances\": {\r\n    \"annualInvestmentAllowance\": 500.25,\r\n    \"businessPremisesRenovationAllowance\": 500.25,\r\n    \"capitalAllowanceMainPool\": 500.25,\r\n    \"capitalAllowanceSpecialRatePool\": 500.25,\r\n    \"zeroEmissionGoodsVehicleAllowance\": 500.25,\r\n    \"enhancedCapitalAllowance\": 500.25,\r\n    \"allowanceOnSales\": 500.25,\r\n    \"capitalAllowanceSingleAssetPool\": 500.25\r\n  },\r\n  \"nonFinancials\": {\r\n    \"class4NicInfo\":{\r\n      \"isExempt\": true,\r\n      \"exemptionCode\": \"003\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/self-employments/{{selfEmploymentId}}/2017-18",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"self-employments",
+										"{{selfEmploymentId}}",
+										"2017-18"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Amend a non-FHL UK property business annual summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"adjustments\": {\r\n    \"includedNonTaxableProfits\": 500.25,\r\n    \"basisAdjustment\": 500.25,\r\n    \"overlapReliefUsed\": 500.25,\r\n    \"accountingAdjustment\": 500.25,\r\n    \"averagingAdjustment\": 500.25,\r\n    \"outstandingBusinessIncome\": 500.25,\r\n    \"balancingChargeBPRA\": 500.25,\r\n    \"balancingChargeOther\": 500.25,\r\n    \"goodsAndServicesOwnUse\": 500.25\r\n  },\r\n  \"allowances\": {\r\n    \"annualInvestmentAllowance\": 500.25,\r\n    \"businessPremisesRenovationAllowance\": 500.25,\r\n    \"capitalAllowanceMainPool\": 500.25,\r\n    \"capitalAllowanceSpecialRatePool\": 500.25,\r\n    \"zeroEmissionGoodsVehicleAllowance\": 500.25,\r\n    \"enhancedCapitalAllowance\": 500.25,\r\n    \"allowanceOnSales\": 500.25,\r\n    \"capitalAllowanceSingleAssetPool\": 500.25\r\n  },\r\n  \"nonFinancials\": {\r\n    \"class4NicInfo\":{\r\n      \"isExempt\": true,\r\n      \"exemptionCode\": \"003\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/uk-properties/other/2017-18",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"uk-properties",
+										"other",
+										"2017-18"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Amend a FHL UK property business annual summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"adjustments\": {\r\n    \"privateUseAdjustment\": 100.25,\r\n    \"balancingCharge\": 100.25,\r\n    \"bpraBalancingCharge\": 100.25,\r\n    \"periodOfGraceAdjustment\": true\r\n  },\r\n  \"allowances\": {\r\n    \"annualInvestmentAllowance\": 100.25,\r\n    \"otherCapitalAllowance\": 100.25,\r\n    \"businessPremisesRenovationAllowance\": 100.25,\r\n    \"propertyAllowance\": 100.25\r\n  },\r\n  \"other\": {\r\n    \"nonResidentLandlord\": false,\r\n    \"rarJointLet\": true\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/self-assessment/ni/{{nino}}/uk-properties/furnished-holiday-lettings/2017-18",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"self-assessment",
+										"ni",
+										"{{nino}}",
+										"uk-properties",
+										"furnished-holiday-lettings",
+										"2017-18"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Individual Calculations (MTD) API",
+					"item": [
+						{
+							"name": "Trigger a Self Assessment Tax Calculation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"taxYear\": \"2017-18\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment tax calculation metadata",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Income Tax and NICs Calculated",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/income-tax-nics-calculated",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"income-tax-nics-calculated"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Taxable Income",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/taxable-income",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"taxable-income"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Allowances, Deductions and Reliefs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/allowances-deductions-reliefs",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"allowances-deductions-reliefs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation End Of Year Estimate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/allowances-deductions-reliefs",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"allowances-deductions-reliefs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Messages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/messages",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"messages"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Business Income Source Summary (MTD) API",
+					"item": [
+						{
+							"name": "Retrieve a Business Income Source Summary (BISS)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/self-assessment/income-summary/{{nino}}/foreign-property-fhl-eea/2021-22/{{businessId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"self-assessment",
+										"income-summary",
+										"{{nino}}",
+										"foreign-property-fhl-eea",
+										"2021-22",
+										"{{businessId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Final Declaration",
+			"item": [
+				{
+					"name": "Individual Calculations (MTD) API",
+					"item": [
+						{
+							"name": "Intent to Crystallise",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"calculationId\": \"041f7e4d-87d9-4d4a-a296-3cfbdf92f7e2\",\r\n  \"links\": [\r\n    {\r\n      \"href\": \"/individuals/calculations/RW399019B/self-assessment/041f7e4d-87d9-4d4a-a296-3cfbdf92f7e2\",\r\n      \"rel\": \"self\",\r\n      \"method\": \"GET\"\r\n    },\r\n    {\r\n      \"href\": \"/individuals/calculations/crystallisation/RW399019B/2019-20/crystallise\",\r\n      \"rel\": \"crystallise\",\r\n      \"method\": \"POST\"\r\n    }\r\n  ]\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/crystallisation/{{nino}}/2020-21/intent-to-crystallise",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"crystallisation",
+										"{{nino}}",
+										"2020-21",
+										"intent-to-crystallise"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment tax calculation metadata",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Taxable Income",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/taxable-income",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"taxable-income"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Income Tax and NICs Calculated",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/income-tax-nics-calculated",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"income-tax-nics-calculated"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Allowances, Deductions and Reliefs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/allowances-deductions-reliefs",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"allowances-deductions-reliefs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Self Assessment Tax Calculation Messages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ee221bf147d9f2f9fb7073578958ec42",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.hmrc.2.0+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/individuals/calculations/{{nino}}/self-assessment/03d6a9b4-f27a-1307-ae18-bf2510a8b034/messages",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"individuals",
+										"calculations",
+										"{{nino}}",
+										"self-assessment",
+										"03d6a9b4-f27a-1307-ae18-bf2510a8b034",
+										"messages"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Client Authorisation API",
+			"item": [
+				{
+					"name": "Applicatoin-restricted Authorisation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_secret",
+									"value": "30d708e5-9e5f-4fd3-86a9-12c83688a1d2",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "pdFMkHO1G9sze51TX5ySdpJfQC2Z",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"description": "refresh_token client_credentials authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "read:self-assessment write:self-assessment",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test-api.service.hmrc.gov.uk/oauth/token",
+							"protocol": "https",
+							"host": [
+								"test-api",
+								"service",
+								"hmrc",
+								"gov",
+								"uk"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User-restricted Authorisation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://test-api.service.hmrc.gov.uk/oauth/authorize?response_type=code&client_id=pdFMkHO1G9sze51TX5ySdpJfQC2Z&scope=read:self-assessment write:self-assessment&state=12345&redirect_uri=http://localhost",
+							"protocol": "https",
+							"host": [
+								"test-api",
+								"service",
+								"hmrc",
+								"gov",
+								"uk"
+							],
+							"path": [
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "pdFMkHO1G9sze51TX5ySdpJfQC2Z"
+								},
+								{
+									"key": "scope",
+									"value": "read:self-assessment write:self-assessment"
+								},
+								{
+									"key": "state",
+									"value": "12345"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exchange authorisation code for access token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"client_id\": \"pdFMkHO1G9sze51TX5ySdpJfQC2Z\",\r\n    \"client_secret\": \"30d708e5-9e5f-4fd3-86a9-12c83688a1d2\",\r\n    \"grant_type\": \"authorization_code\",\r\n    \"redirect_uri\": \"http://localhost:49307/callback\",\r\n    \"code\": \"9f0838bb55e24385ba702be783926e8a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://test-api.service.hmrc.gov.uk/oauth/token",
+							"protocol": "https",
+							"host": [
+								"test-api",
+								"service",
+								"hmrc",
+								"gov",
+								"uk"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VAT (MTD) API",
+			"item": [
+				{
+					"name": "Retrieve VAT obligations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/obligations?from=2023-01-01&to=2023-01-04&status=O",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"obligations"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "to",
+									"value": "2023-01-04"
+								},
+								{
+									"key": "status",
+									"value": "O",
+									"description": "F, O"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit VAT return for period",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"periodKey\": \"A003\",\r\n  \"vatDueSales\": 105.50,\r\n  \"vatDueAcquisitions\": -100.45,\r\n  \"totalVatDue\": 5.05,\r\n  \"vatReclaimedCurrPeriod\": 105.15,\r\n  \"netVatDue\": 100.10,\r\n  \"totalValueSalesExVAT\": 300,\r\n  \"totalValuePurchasesExVAT\": 300,\r\n  \"totalValueGoodsSuppliedExVAT\": 3000,\r\n  \"totalAcquisitionsExVAT\": 3000,\r\n  \"finalised\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/returns",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"returns"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2017-01-25",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "2019-01-25",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View VAT Return",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/returns/18A2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"returns",
+								"18A2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve VAT liabilities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							},
+							{
+								"key": "Gov-Test-Scenario",
+								"value": "MULTIPLE_LIABILITIES",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/liabilities?from=2018-01-25&to=2018-12-31",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"liabilities"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2018-01-25"
+								},
+								{
+									"key": "to",
+									"value": "2018-12-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve VAT payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							},
+							{
+								"key": "Gov-Test-Scenario",
+								"value": "MULTIPLE_PAYMENTS",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/payments?from=2023-01-01&to=2023-01-04",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"payments"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "to",
+									"value": "2023-01-04"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve VAT penalties [test only]",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/penalties",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"penalties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve financial details [test only]",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/organisations/vat/{{vrn}}/financial-details/XP123456789013",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organisations",
+								"vat",
+								"{{vrn}}",
+								"financial-details",
+								"XP123456789013"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample API",
+			"item": [
+				{
+					"name": "Hello World",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://test-api.service.hmrc.gov.uk/hello/world",
+							"protocol": "https",
+							"host": [
+								"test-api",
+								"service",
+								"hmrc",
+								"gov",
+								"uk"
+							],
+							"path": [
+								"hello",
+								"world"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hello User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1f920ace9d4ce7fb07295d99b1abe623",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://test-api.service.hmrc.gov.uk/hello/user",
+							"protocol": "https",
+							"host": [
+								"test-api",
+								"service",
+								"hmrc",
+								"gov",
+								"uk"
+							],
+							"path": [
+								"hello",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hello Application",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9def6ee20ebf7663591a82b1f4758ec0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.hmrc.1.0+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://test-api.service.hmrc.gov.uk/hello/application",
+							"protocol": "https",
+							"host": [
+								"test-api",
+								"service",
+								"hmrc",
+								"gov",
+								"uk"
+							],
+							"path": [
+								"hello",
+								"application"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://test-api.service.hmrc.gov.uk",
+			"type": "string"
+		},
+		{
+			"key": "arn",
+			"value": "XARN0322902",
+			"type": "string"
+		},
+		{
+			"key": "nino",
+			"value": "GH199166D",
+			"type": "string"
+		},
+		{
+			"key": "vrn",
+			"value": "423439757",
+			"type": "string"
+		},
+		{
+			"key": "businessId",
+			"value": "XBIS12345678901",
+			"type": "string"
+		},
+		{
+			"key": "selfEmploymentId",
+			"value": "XBIS12345678901",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "c532c9864b154d8703e2b548ceff8eab",
+			"type": "string"
+		}
+	]
+}
